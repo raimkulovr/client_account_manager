@@ -1,7 +1,7 @@
 <?php
 const DROPDOWN_TABS = [
-	["accounts/index.php", "Список", [["accounts/index.php", "клиентов"], ["companies/index.php", "компаний"]]],
-	["accounts/add.php", "Добавить", [["accounts/add.php", "клиента"], ["companies/add.php", "компанию"]]],
+	["accounts/index.php", "Список", [["accounts/index.php", "клиентов"],]],
+	["accounts/add.php", "Добавить", [["accounts/write.php", "клиента"],]],
 ];
 
 require_once 'config.php';
@@ -38,7 +38,7 @@ function renderDropdownNavbarItemList(): string
 
 <head>
 	<meta charset="utf-8">
-	<meta name="description" content="A short description." />
+	<meta name="description" content="Simple CRUD demonstrator." />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<base href="<?php echo BASE_URL ?>">
 	<title>Client Account Manager</title>
@@ -64,10 +64,6 @@ function renderDropdownNavbarItemList(): string
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<?php echo renderDropdownNavbarItemList(); ?>
 					</ul>
-					<form class="d-flex mb-2 mb-lg-0" role="search">
-						<input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
-					</form>
-					<button class="btn btn-primary" type="submit">Войти</button>
 				</div>
 			</div>
 		</nav>

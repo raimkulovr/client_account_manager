@@ -104,7 +104,7 @@ function renderPageButton(int $page_int)
             $addButtons = fn(int $id) => <<< HTML
                 <td>
                     <a href="{$url}write.php?edit_id=$id" class="text-warning me-2"><i class="bi bi-pencil-fill"></i></a>
-                    <a href="{$url}delete.php?id=$id" class="text-danger" onclick="return confirm('Удалить аккаунт?');"><i class="bi bi-trash-fill"></i></a>
+                    <a href="{$url}delete.php?delete_id=$id" class="text-danger" onclick="return confirm('Удалить аккаунт?');"><i class="bi bi-trash-fill"></i></a>
                 </td>
                 HTML;
 

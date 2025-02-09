@@ -1,3 +1,5 @@
 <?php
-header("Location: accounts/index.php");
-exit();
+if($_SERVER['REQUEST_URI'] == '/'){
+    header("Location: accounts/index.php");
+    exit();
+}

@@ -139,8 +139,8 @@ function renderCompaniesOptions()
             <label for="company_id" class="form-label">Компания</label>
             <select id="company_id" name="company_id" class="form-select" onchange="handleSelection(this)">
                 <option value="">-- Выберите компанию --</option>
-                <?php renderCompaniesOptions(); ?>
                 <option value="new">+ Добавить</option>
+                <?php renderCompaniesOptions(); ?>
             </select>
         </div>
         <div class="col-md-8" id="company_name_div" style="display: none;">

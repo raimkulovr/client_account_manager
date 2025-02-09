@@ -1,5 +1,3 @@
 <?php
-include '../header.php';
-?>
-
-<?php include '../footer.php'; ?>
+header("Location: accounts/index.php");
+exit();

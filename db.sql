@@ -3,7 +3,6 @@
 -- Host: localhost    Database: zimalab_php_task
 -- ------------------------------------------------------
 -- Server version	8.4.4
-
 --
 -- Table structure for table `clients`
 --
@@ -20,6 +19,7 @@ CREATE TABLE `clients` (
   `phone_number2` varchar(20) DEFAULT NULL,
   `phone_number3` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_email` (`email`),
   KEY `company_id` (`company_id`),
   CONSTRAINT `clients_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

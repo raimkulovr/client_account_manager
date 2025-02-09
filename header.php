@@ -1,7 +1,7 @@
 <?php
 const DROPDOWN_TABS = [
 	["accounts/index.php", "Список", [["accounts/index.php", "клиентов"],]],
-	["accounts/add.php", "Добавить", [["accounts/write.php", "клиента"],]],
+	["accounts/write.php", "Добавить", [["accounts/write.php", "клиента"],]],
 ];
 
 require_once 'config.php';

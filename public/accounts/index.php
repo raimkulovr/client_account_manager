@@ -1,6 +1,8 @@
 <?php
 include_once '../../header.php';
 
+$current_url = BASE_URL . "accounts/index.php";
+
 $limit = 10;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $page = $page < 1 ? 1 : $page;
@@ -22,15 +24,13 @@ $stmt->execute([
 
 $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$currentUrl = BASE_URL . "accounts/index.php";
-
 $stmt = $pdo->query("SELECT COUNT(*) AS total FROM clients");
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $clients_total = $row['total'];
 $max_page = ceil($clients_total / $limit);
 if ($page > $max_page) {
-    header("Location: " . $currentUrl . "?page=$max_page");
+    header("Location: " . $current_url . "?page=$max_page");
     exit();
 }
 
@@ -42,8 +42,8 @@ function calculateNumber(int $index)
 
 function renderPageButton(int $page_int)
 {
-    global $page, $currentUrl;
-    echo "<li class=\"page-item\"><a class=\"page-link " . ($page == $page_int ? "active" : "") . "\" href=\"" . $currentUrl . "?page=$page_int" . "\">$page_int</a></li>";
+    global $page, $current_url;
+    echo "<li class=\"page-item\"><a class=\"page-link " . ($page == $page_int ? "active" : "") . "\" href=\"" . $current_url . "?page=$page_int" . "\">$page_int</a></li>";
 }
 ?>
 
@@ -62,7 +62,7 @@ function renderPageButton(int $page_int)
         <nav aria-label="Page navigation example">
             <ul class="pagination mb-0">
                 <li class="page-item <?php if ($page == 1) echo "disabled"; ?>">
-                    <a class="page-link" href="<?php echo $currentUrl . "?page=" . $page-1?>" aria-label="Previous">
+                    <a class="page-link" href="<?php echo $current_url . "?page=" . $page-1?>" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -77,14 +77,13 @@ function renderPageButton(int $page_int)
                 ?>
                 <?php if ($max_page > 1) renderPageButton($max_page) ?>
                 <li class="page-item <?php if ($page == $max_page) echo "disabled"; ?>">
-                    <a class="page-link" href="<?php echo $currentUrl . "?page=" . $page+1?>" aria-label="Next">
+                    <a class="page-link" href="<?php echo $current_url . "?page=" . $page+1?>" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
             </ul>
         </nav>
     </div>
-
 
     <table class="table table-striped table-hover">
         <thead class="table-light">

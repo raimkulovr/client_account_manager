@@ -87,7 +87,7 @@ class AccountWriteFormController implements IAccountCreator, IAccountEditor
             if ($account['company_id'] === "new" && $account['company_name']) {
                 $company_id = $this->createCompany($account['company_id'], $account['company_name']);
             }
-            $company_id = (int) $company_id;
+            $company_id = (int) ($company_id ?? $account['company_id']);
             $company_id = ($company_id > 0) ? $company_id : null;
 
             $sql = "INSERT INTO clients (first_name, last_name, email, company_id, position, phone_number1, phone_number2, phone_number3) 

@@ -2,14 +2,7 @@
 include_once '../../header.php';
 require_once '../../models/company.php';
 require_once '../../models/account.php';
-
-class OperationResult
-{
-    function __construct(
-        public readonly bool $success,
-        public readonly string $message = "",
-    ) {}
-}
+require_once '../../models/operation_result.php';
 
 interface IAccountCreator
 {

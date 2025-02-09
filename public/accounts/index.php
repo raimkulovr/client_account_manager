@@ -1,5 +1,6 @@
 <?php
 include_once '../../header.php';
+
 $limit = 10;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $page = $page < 1 ? 1 : $page;
@@ -21,7 +22,7 @@ $stmt->execute([
 
 $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$currentUrl = BASE_URL . "/accounts/index.php";
+$currentUrl = BASE_URL . "accounts/index.php";
 
 $stmt = $pdo->query("SELECT COUNT(*) AS total FROM clients");
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -99,10 +100,11 @@ function renderPageButton(int $page_int)
         </thead>
         <tbody>
             <?php
+            $url = BASE_URL . "accounts/";
             $addButtons = fn(int $id) => <<< HTML
                 <td>
-                    <a href="edit.php?id=$id" class="text-warning me-2"><i class="bi bi-pencil-fill"></i></a>
-                    <a href="delete.php?id=$id" class="text-danger" onclick="return confirm('Удалить аккаунт?');"><i class="bi bi-trash-fill"></i></a>
+                    <a href="{$url}write.php?edit_id=$id" class="text-warning me-2"><i class="bi bi-pencil-fill"></i></a>
+                    <a href="{$url}delete.php?id=$id" class="text-danger" onclick="return confirm('Удалить аккаунт?');"><i class="bi bi-trash-fill"></i></a>
                 </td>
                 HTML;
 

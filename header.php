@@ -64,6 +64,7 @@ function renderDropdownNavbarItemList(): string
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<?php echo renderDropdownNavbarItemList(); ?>
 					</ul>
+					<a href="https://github.com/raimkulovr/client_account_manager" target="_blank"><i class="bi bi-github"></i></a>
 				</div>
 			</div>
 		</nav>

@@ -260,7 +260,7 @@ function renderCompaniesOptions()
 </script>
 <div class="container flex-grow-1">
     <h1 class="display-6 py-3"><?php echo $controller->is_edit ? 'Редактировать' : 'Добавить'?> аккаунт</h1>
-    <p class="text-secondary">Поля отмечанные "*" обязательны к заполнению. Пожалуйста, не указывайте настоящие личные данные.</p>
+    <p class="text-secondary">Поля отмеченные "*" обязательны к заполнению. Пожалуйста, не указывайте настоящие личные данные.</p>
     <?php
     if (isset($controller->operation_result)) {
         $success = $controller->operation_result->success;

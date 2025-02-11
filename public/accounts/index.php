@@ -29,7 +29,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $clients_total = $row['total'];
 $max_page = ceil($clients_total / $limit);
-if ($page > $max_page) {
+if ($max_page!=0 && $page > $max_page) {
     header("Location: " . $current_url . "?page=$max_page");
     exit();
 }
@@ -58,7 +58,12 @@ function renderPageButton(int $page_int)
 <div class="container flex-grow-1">
     <h1 class="display-6 py-3">Список аккаунтов</h1>
     <div class="d-flex justify-content-between align-items-center my-3">
-        <p class="text-secondary mb-0">Показ <?php echo calculateNumber(0) ?>-<?php echo calculateNumber(array_key_last($clients) ?? 0) ?> из <?php echo $clients_total ?> аккаунтов</p>
+        <?php 
+        if($clients_total>=1) 
+            echo "<p class=\"text-secondary mb-0\">Показ " . calculateNumber(0) . "-" . (calculateNumber(array_key_last($clients) ?? 0)) .  " из $clients_total</p>";
+        else 
+            echo "<p class=\"text-secondary mb-0\">Здесь пока ничего нет. <a href=\"" . BASE_URL . "accounts/write.php\">Добавить?</a></p>";
+        ?>
         <nav aria-label="Page navigation example">
             <ul class="pagination mb-0">
                 <li class="page-item <?php if ($page == 1) echo "disabled"; ?>">

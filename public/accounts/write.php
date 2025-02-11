@@ -17,6 +17,7 @@ interface IAccountEditor
 class AccountWriteFormController implements IAccountCreator, IAccountEditor
 {
     protected array $companies = [];
+    protected ?int $number_of_accounts = null;
     public OperationResult $operation_result;
     public readonly bool $is_edit;
     public readonly ?Account $account;
@@ -28,6 +29,29 @@ class AccountWriteFormController implements IAccountCreator, IAccountEditor
             $this->is_edit = false;
             $this->account = null;
         }
+    }
+
+    private function getNumberOfAccounts(): int
+    {
+        if($this->number_of_accounts) return $this->number_of_accounts;
+
+        $sql = "SELECT COUNT(*) AS total FROM clients";
+        $stmt = $this->pdo->query($sql);
+        $result = $stmt->fetch();
+        $count = $result['total'];
+        
+        $this->number_of_accounts = $count;
+        return $count;
+    }
+
+    public function canCreateAccount() : bool 
+    {
+        return $this->getNumberOfAccounts() < 1000;
+    }
+    
+    public function canCreateCompany() : bool 
+    {
+        return count($this->getCompanies()) < 1000;
     }
 
     public function getCompanies(): array
@@ -51,6 +75,8 @@ class AccountWriteFormController implements IAccountCreator, IAccountEditor
 
     public function createCompany($company_id, $company_name) 
     {
+        if(!$this->canCreateCompany()) return;
+
         $sql = "INSERT INTO companies (name) VALUES (:name)";
         $stmt = $this->pdo->prepare($sql);
         try {
@@ -81,6 +107,7 @@ class AccountWriteFormController implements IAccountCreator, IAccountEditor
 
     public function createAccount()
     {
+        if(!$this->canCreateAccount()) return;
         $account = $this->getRawAccountFromPost();
 
         if ($account['first_name'] && $account['last_name'] && $account['email']) {
@@ -270,7 +297,7 @@ function renderCompaniesOptions()
             <label for="company_id" class="form-label">Компания</label>
             <select id="company_id" name="company_id" class="form-select" onchange="handleSelection(this)">
                 <option value="">-- Выберите компанию --</option>
-                <option value="new">+ Добавить</option>
+                <?php if($controller->canCreateCompany()) echo '<option value="new">+ Добавить</option>' ?>
                 <?php renderCompaniesOptions(); ?>
             </select>
         </div>
@@ -295,7 +322,7 @@ function renderCompaniesOptions()
         </div>
 
         <div class="col-12">
-            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <button type="submit" class="btn btn-primary" <?php if(!$controller->canCreateAccount()) echo 'disabled' ?>>Сохранить</button>
         </div>
     </form>
 </div>

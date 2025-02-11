@@ -1,5 +1,6 @@
 <footer class="container mt-auto">
 	<div class="pt-5">
+		<p class="text-center">ДЕМО сайт. Количество записей клиентов и компаний ограничено 1000. База данных сбрасывается в полночь по времени Астаны.</p>
 		<p class="text-center">&copy; <?php echo date("Y"); ?> R. Radmir. All rights reserved.</p>
 	</div>
 </footer>

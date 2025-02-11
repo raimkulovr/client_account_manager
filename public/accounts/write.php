@@ -233,7 +233,7 @@ function renderCompaniesOptions()
     foreach ($controller->getCompanies() as $company) {
         $result .= "<option ";
         $result .= "value=\"" . $company->id . "\" ";
-        if($controller->account->company_id == $company->id) $result .= "selected";
+        if($controller->account && $controller->account->company_id == $company->id) $result .= "selected";
         $result .= ">";
         $result .= $company->name . " ";
         $result .= "</option>";
